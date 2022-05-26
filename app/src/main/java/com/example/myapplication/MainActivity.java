@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void login(View view){
-            /*
             EditText username = (EditText) findViewById(R.id.editTextTextPersonName);
             EditText password = (EditText) findViewById(R.id.editTextTextPassword);
+            /*
             if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin123")){
                 Toast.makeText(getApplicationContext(),"redirecting",Toast.LENGTH_SHORT).show();
             }
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             */
             Intent intent = new Intent(this,DisplayMessageActivity.class);
             EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
+
             String message = editText.getText().toString();
             intent.putExtra(EXTRA_MESSAGE,message);
             startActivity(intent);
