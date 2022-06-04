@@ -4,9 +4,9 @@ package com.example.myapplication;
  * This is the course class
  * */
 public class Course {
+
     private String code;
     private String name;
-
     //constructor
     public Course(String code,String name){
         this.code = code;
