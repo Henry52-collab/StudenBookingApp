@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+/**
+ *Account super class for StudentAccount, InstructorAccount, and AdminAccount
+ */
+
 public class Account {
     String user;
     public static final String TYPE = " ";

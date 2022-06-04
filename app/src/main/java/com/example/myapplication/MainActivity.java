@@ -20,15 +20,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 /**
- * This is the back end for the login screen
+ * This is the back end for the login screen, corresponds to activity_main.xml
  * */
-public class MainActivity extends AppCompatActivity{
-    Button login,register;
-    EditText usernameEdt,passwordEdt;
+public class MainActivity extends AppCompatActivity {
+    Button login, register;
+    EditText usernameEdt, passwordEdt;
     Intent intent;
     DatabaseReference database;
     ArrayList<Account> accounts;
-    AdminAccount admin = new AdminAccount("Admin","admin123");
+    AdminAccount admin = new AdminAccount("Admin", "admin123");
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
@@ -46,20 +46,27 @@ public class MainActivity extends AppCompatActivity{
          * */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 String username = usernameEdt.getText().toString();
                 String password = passwordEdt.getText().toString();
-                //Checking if the credentials are valid
-                if(TextUtils.isEmpty(username) && TextUtils.isEmpty(password))
-                    Toast.makeText(MainActivity.this, "Please enter valid credentials", Toast.LENGTH_SHORT).show();
-                //intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
-                //startActivity(intent);
-                loginUser(username,password);
+                //Checking if the credentials are valid, if not, showing a warning
+                if (TextUtils.isEmpty(username))
+                    usernameEdt.setError("Please enter username");
+                if(TextUtils.isEmpty(password))
+                    passwordEdt.setError("Please enter password");
+                //Otherwise, perform the login action
+                //The app crashes when login button is pressed, fix it here.
+                loginUser(username, password);
             }
         });
 
+        /**
+         * Method called when register button is called, takes the user to register screen
+         * */
         register.setOnClickListener(new View.OnClickListener() {
             @Override
+            //Do not change
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, RegisterHome.class);
                 startActivity(intent);
@@ -67,67 +74,48 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void loginUser(String userName,String password){
+    /**
+     * The method called when user is trying to login with correct credentials
+     * */
+    private void loginUser(String userName, String password) {
+        /*
+        * Please implement the login functionality here, be sure to check if the account exists in the database.
+        * */
         ArrayList<StudentAccount> students = new ArrayList<>();
         ArrayList<AdminAccount> admins = new ArrayList<>();
         ArrayList<InstructorAccount> instructors = new ArrayList<>();
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot each:snapshot.getChildren()){
+                //implement
+                //Loop over entries in database.
+                for (DataSnapshot each : snapshot.getChildren()) {
                     StudentAccount account = each.getValue(StudentAccount.class);
-                    //need testing
-                    //if(account.getType().equals("student"))students.add((StudentAccount) account);
-                    //else if(account.getType().equals("instructor"))instructors.add((InstructorAccount) account);
                     accounts.add(account);
                 }
-                if(accounts.contains(new StudentAccount(userName,password))){
-                    Intent intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
+                //Check if the entry exists.
+                if (accounts.contains(new StudentAccount(userName, password))) {
+                    Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
                     String message = "Welcome " + userName + " ,you have logged in as student";
-                    intent.putExtra(EXTRA_MESSAGE,message);
+                    intent.putExtra(EXTRA_MESSAGE, message);
                     startActivity(intent);
                 }
-
+                //Add special login for admin, an admin account has been pre-created in the database with username "Admin" and password "admin123"
             }
 
             @Override
+            /**
+             * Method called when failed to retrieve an entry
+             * */
             public void onCancelled(@NonNull DatabaseError error) {
-
+                //Optional, You can implement if you want.
             }
         });
     }
-
-
-
-
-
-
-
-        /*
-        private void setClickListeners(){
-            login.setOnClickListener(this);
-            register.setOnClickListener(this);
-        }
-
-        public void onClick(View v){
-            switch (v.getId()){
-                case R.id.Login:
-                    if (TextUtils.isEmpty(username.toString()) && TextUtils.isEmpty(password.toString()))
-                        Toast.makeText(MainActivity.this, "Please enter valid credentials", Toast.LENGTH_SHORT).show();
-                    if(username.getText().toString().trim().equals("Admin") && password.getText().toString().trim().equals("admin123")){
-                        Intent intent = new Intent(this,DisplayMessageActivity.class);
-                        EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
-                        String message = "Welcome " + username.getText().toString() + " You have logged in as admin";
-                        intent.putExtra(EXTRA_MESSAGE,message);
-                        startActivity(intent);
-                    }
-                    break;
-                case R.id.idBtnRegister:
-                    Intent intent = new Intent(this,MainActivity2.class);
-                    startActivity(intent);
-                    break;
-                }
-        }
-        */
 }
+
+
+
+
+
 

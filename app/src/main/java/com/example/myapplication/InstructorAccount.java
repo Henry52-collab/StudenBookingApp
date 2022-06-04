@@ -2,6 +2,9 @@ package com.example.myapplication;
 
 import com.google.android.gms.common.AccountPicker;
 
+/**
+ * Instructor functionality for deliverable2.
+ * */
 public class InstructorAccount extends Account {
         private Instructor instructor;
         public static final String TYPE = "instructor";

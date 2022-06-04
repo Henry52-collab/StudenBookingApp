@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+/**
+ * Student functionality for deliverable 3.
+ * */
 public class StudentAccount extends Account{
     private Student student;
     public static final String TYPE = "student";

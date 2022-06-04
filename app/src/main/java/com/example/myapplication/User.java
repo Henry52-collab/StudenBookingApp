@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+/**
+ * User super class for Student, Instructor, Admin.
+ * */
 public class User {
      protected String name;
      protected String password;
