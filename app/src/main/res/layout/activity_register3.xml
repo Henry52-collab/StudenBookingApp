@@ -17,7 +17,7 @@
         android:layout_marginTop="84dp"
         android:layout_marginEnd="12dp"
         android:gravity="center_horizontal"
-        android:text="Welcome to Geeks for Geeks"
+        android:text="Welcome"
         android:textAlignment="center"
         android:textColor="@color/purple_700"
         android:textSize="18sp"

@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Locale;
 
 /**
- * This class is the backend for the register screen
+ * This class is the backend for the register screen, corresponds to acticity_main2.xml.
  * */
 public class RegisterHome extends AppCompatActivity {
     private EditText usernameEdt,userType, passwordEdt;
@@ -26,23 +26,27 @@ public class RegisterHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        //Make usertype into a dropdown menu, implement it here and in activity_main2.xml.
         database = FirebaseDatabase.getInstance().getReference();
-
         usernameEdt = findViewById(R.id.idEdtUserName);
         passwordEdt = findViewById(R.id.idEdtPassword);
         userType = findViewById(R.id.editUserType);
         registerBtn = findViewById(R.id.idBtnRegister);
+
+        /**
+         * This method is called when register button is clicked.
+         * */
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString();
-
                 if(TextUtils.isEmpty(userName))
                     usernameEdt.setError("Enter a valid username");
                 String password = passwordEdt.getText().toString();
-
                 if(TextUtils.isEmpty(password))
                     passwordEdt.setError("Enter a valid password");
+                //Do not change anything above this line
+                //Implement here
                 String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
                 if(TextUtils.isEmpty(type))
                     userType.setError("Enter a valid password");
@@ -75,9 +79,11 @@ public class RegisterHome extends AppCompatActivity {
         Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
     }
 
+
     /**
      * Method for writing new admins into database
      * */
+    //Admins don't need to register, add it straight to database.
     /*
     public void writeNewAdmin(String type,String name,String password){
         Account account = new AdminAccount(name,password);
