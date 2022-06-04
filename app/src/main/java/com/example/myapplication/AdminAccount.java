@@ -16,7 +16,6 @@ public class AdminAccount extends Account
     //delete after database support
     private ArrayList<Course> courses;
     private Admin admin;
-    private CourseController c;
     //Database support
     private DatabaseReference database;
     public static final String TYPE = "admin";
@@ -33,7 +32,6 @@ public class AdminAccount extends Account
     public AdminAccount(String name,String password,String cName,String code){
         courses = new ArrayList<>();
         admin = new Admin(name,password);
-        c = new CourseController(new Course(cName,code));
         user = "Admin";
         database = FirebaseDatabase.getInstance().getReference();
     }
@@ -142,7 +140,6 @@ public class AdminAccount extends Account
      * @param code Old code of the course
      * @param newCode new code of the course
      * */
-
     public void editCode(String code, String newCode){
         //Implement
     }

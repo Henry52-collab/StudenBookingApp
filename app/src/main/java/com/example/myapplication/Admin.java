@@ -13,6 +13,7 @@ public class Admin {
         this.password = password;
         this.username = username;
     }
+
     public String getUserName(){
         return username;
     }
