@@ -6,11 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".DisplayMessageActivity">
 
+    <!--text view for displaying user name-->
+
+    <!--button for making user log out-->
+
+    <TextView
+        android:id="@+id/idTVHeader"
+        android:layout_width="365dp"
+        android:layout_height="39dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="72dp"
+        android:gravity="center_horizontal"
+        android:text="@string/Welcome"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/idTVUserName"
+        android:layout_width="382dp"
+        android:layout_height="31dp"
+        android:layout_below="@id/idTVHeader"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="UserName"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/BtnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTVHeader" />
+
+    <Button
+        android:id="@+id/BtnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idTVUserName"
+        android:layout_centerInParent="true"
+        android:text="LogOut"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="251dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="230dp"
+        android:layout_height="101dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

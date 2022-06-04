@@ -13,7 +13,7 @@
         android:layout_width="235dp"
         android:layout_height="51dp"
         android:layout_marginTop="28dp"
-        android:text="School"
+        android:text="@string/School"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,8 @@
         android:layout_marginTop="52dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:hint="password"
+        app:layout_constraintBottom_toTopOf="@+id/Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,36 +40,34 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="UserName"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="64dp"
-        android:onClick="login"
-        android:text="Login"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:text="@string/Login"
+        app:layout_constraintEnd_toStartOf="@+id/idBtnRegister"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/idBtnRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
-        android:onClick="cancel"
-        android:text="cancel"
+        android:text="@string/Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/Login"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <ImageView
