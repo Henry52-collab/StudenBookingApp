@@ -15,6 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Locale;
 
+/**
+ * This class is the backend for the register screen
+ * */
 public class RegisterHome extends AppCompatActivity {
     private EditText usernameEdt,userType, passwordEdt;
     private Button registerBtn;
@@ -33,7 +36,7 @@ public class RegisterHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString();
-                /*
+
                 if(TextUtils.isEmpty(userName))
                     usernameEdt.setError("Enter a valid username");
                 String password = passwordEdt.getText().toString();
@@ -45,13 +48,16 @@ public class RegisterHome extends AppCompatActivity {
                     userType.setError("Enter a valid password");
                 if(type.equals("student")) writeNewStudent(type, userName,password);
                 if(type.equals("instructor")) writeNewInstructor(type,userName,password);
-                if(type.equals("admin")) writeNewAdmin(type,userName,password);
-                */
+                //if(type.equals("admin")) writeNewAdmin(type,userName,password);
+
 
             }
         });
     }
 
+    /**
+     * Method for writing new students
+     * */
     public void writeNewStudent(String type,String name, String password){
         String id = database.push().getKey();
         Account account = new StudentAccount(name,password);
@@ -59,6 +65,9 @@ public class RegisterHome extends AppCompatActivity {
         Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Method for writing new instrutors into database
+     * */
     public void writeNewInstructor(String type,String name,String password){
         Account account = new InstructorAccount(name,password);
         String id = database.push().getKey();
@@ -66,10 +75,15 @@ public class RegisterHome extends AppCompatActivity {
         Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Method for writing new admins into database
+     * */
+    /*
     public void writeNewAdmin(String type,String name,String password){
         Account account = new AdminAccount(name,password);
         String id = database.push().getKey();
         database.child(type + 's').child(id).setValue(account);
         Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
     }
+    */
 }
