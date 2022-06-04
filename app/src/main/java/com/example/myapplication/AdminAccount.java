@@ -7,12 +7,11 @@ public class AdminAccount extends Account
     private ArrayList<Course> courses;
     private Admin admin;
     private CourseController c;
-
+    public static final String TYPE = "admin";
     public AdminAccount(){
         courses = new ArrayList<>();
         admin = new Admin("admin", "admin123");
         user = "Admin";
-
     }
 
     public AdminAccount(String name,String password){
@@ -27,15 +26,19 @@ public class AdminAccount extends Account
         c = new CourseController(new Course(cName,code));
         user = "Admin";
     }
+
     public int size(){
         return courses.size();
     }
+    public String getAdminName(){return admin.getUserName();}
+    public String getAdminPassword(){return admin.getPassword();}
+    public void setAdminName(String name){admin.setUserName(name);}
+    public void setAdminPassword(String password){admin.setPassword(password);}
 
     public void AddCourse(Course course){
         if(courses.contains(course))
             return;
         courses.add(course);
-
     }
 
     public void deleteCourseByName(String name){
@@ -52,7 +55,6 @@ public class AdminAccount extends Account
             }
         }
     }
-
     public Course createCourse(String name,String code){
         return new Course(name,code);
     }

@@ -1,9 +1,14 @@
 package com.example.myapplication;
 
 public class User {
-     String name;
-     String password;
+     protected String name;
+     protected String password;
 
+    public User(){}
+    public User(String name,String password){
+        this.name = name;
+        this.password = password;
+    }
     public String getName() {
         return name;
     }
