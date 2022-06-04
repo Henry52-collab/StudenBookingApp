@@ -33,7 +33,7 @@ public class RegisterHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString();
-                /*
+
                 if(TextUtils.isEmpty(userName))
                     usernameEdt.setError("Enter a valid username");
                 String password = passwordEdt.getText().toString();
@@ -46,7 +46,7 @@ public class RegisterHome extends AppCompatActivity {
                 if(type.equals("student")) writeNewStudent(type, userName,password);
                 if(type.equals("instructor")) writeNewInstructor(type,userName,password);
                 if(type.equals("admin")) writeNewAdmin(type,userName,password);
-                */
+
 
             }
         });
