@@ -19,7 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
+/**
+ * This is the back end for the login screen
+ * */
 public class MainActivity extends AppCompatActivity{
     Button login,register;
     EditText usernameEdt,passwordEdt;
@@ -39,11 +41,15 @@ public class MainActivity extends AppCompatActivity{
         register = findViewById(R.id.idBtnRegister);
         database = FirebaseDatabase.getInstance().getReference();
         accounts = new ArrayList<>();
+        /**
+         * This is the onclick method for the login button. If the login button is clicked, this method is called.
+         * */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameEdt.getText().toString();
                 String password = passwordEdt.getText().toString();
+                //Checking if the credentials are valid
                 if(TextUtils.isEmpty(username) && TextUtils.isEmpty(password))
                     Toast.makeText(MainActivity.this, "Please enter valid credentials", Toast.LENGTH_SHORT).show();
                 //intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
