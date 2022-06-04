@@ -2,6 +2,9 @@ package com.example.myapplication;
 
 import java.util.ArrayList;
 
+/**
+ * Course controller class for course as to uphold the MVC design principle. Provides control to a course instance
+ * */
 public class CourseController {
 
 
