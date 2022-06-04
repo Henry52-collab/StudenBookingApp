@@ -52,6 +52,9 @@ public class RegisterHome extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method for writing new students
+     * */
     public void writeNewStudent(String type,String name, String password){
         String id = database.push().getKey();
         Account account = new StudentAccount(name,password);
@@ -59,6 +62,9 @@ public class RegisterHome extends AppCompatActivity {
         Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Method for writing new instrutors into database
+     * */
     public void writeNewInstructor(String type,String name,String password){
         Account account = new InstructorAccount(name,password);
         String id = database.push().getKey();
@@ -66,6 +72,9 @@ public class RegisterHome extends AppCompatActivity {
         Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Method for writing new admins into database
+     * */
     public void writeNewAdmin(String type,String name,String password){
         Account account = new AdminAccount(name,password);
         String id = database.push().getKey();
