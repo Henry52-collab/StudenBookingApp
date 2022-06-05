@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     ArrayList<Account> accounts;
     AdminAccount admin = new AdminAccount("Admin", "admin123");
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(String userName, String password) {
         /*
         * Please implement the login functionality here, be sure to check if the account exists in the database.
+        *
+        *  EDIT: Login crash occurs here, so you may want to remove everything that's currently here
+        *  If you could also pass on the username and the role of the person logging in to DisplayMessageActivity,
+        * (see lines 103-106 below) that would be greatly appreciated!
         * */
         ArrayList<StudentAccount> students = new ArrayList<>();
         ArrayList<AdminAccount> admins = new ArrayList<>();
@@ -93,15 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     StudentAccount account = each.getValue(StudentAccount.class);
                     accounts.add(account);
                 }
+
                 //Check if the entry exists.
                 if (accounts.contains(new StudentAccount(userName, password))) {
                     Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
-                    String message = "Welcome " + userName + " ,you have logged in as student";
-                    intent.putExtra(EXTRA_MESSAGE, message);
+                    intent.putExtra("Username2", userName); // EDIT: passes the username to Display activity under the key "username2"
+                    // EDIT: if possible, please pass the role to Display activity under the key "Type2"
                     startActivity(intent);
                 }
-                //Add special login for admin, an admin account has been pre-created in the database with username "Admin" and password "admin123"
+
+
             }
+
 
             @Override
             /**

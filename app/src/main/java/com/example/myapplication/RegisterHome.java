@@ -16,12 +16,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Locale;
 
 /**
- * This class is the backend for the register screen, corresponds to acticity_main2.xml.
+ * This class is the backend for the register screen, corresponds to activity_main2.xml.
  * */
 public class RegisterHome extends AppCompatActivity {
     private EditText usernameEdt,userType, passwordEdt;
     private Button registerBtn;
     private DatabaseReference database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +51,25 @@ public class RegisterHome extends AppCompatActivity {
                 String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
                 if(TextUtils.isEmpty(type))
                     userType.setError("Enter a valid password");
-                if(type.equals("student")) writeNewStudent(type, userName,password);
-                if(type.equals("instructor")) writeNewInstructor(type,userName,password);
-                //if(type.equals("admin")) writeNewAdmin(type,userName,password);
 
+                boolean isSuccessful = false; // EDIT: added this but could possibly be removed once more specific error handling is implemented
+                if(type.equals("student")) {
+                    writeNewStudent(type, userName,password);
+                    isSuccessful = true;
+                }
+                if(type.equals("instructor")) {
+                    writeNewInstructor(type,userName,password);
+                    isSuccessful = true;
+                }
 
+                // EDIT: passes username and type to DisplayMessageActivity before going to said activity
+
+                if (isSuccessful) {
+                    Intent intent = new Intent(RegisterHome.this, DisplayMessageActivity.class);
+                    intent.putExtra("Username", userName);
+                    intent.putExtra("Type", type);
+                    startActivity(intent);
+                }
             }
         });
     }
