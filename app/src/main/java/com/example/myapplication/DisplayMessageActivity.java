@@ -29,6 +29,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         username = findViewById(R.id.idTVUserName);
         role = findViewById(R.id.Role);
 
+
         /* Set username and role TextView to the respective username and role of user */
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -77,9 +78,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 finish();
             }
 
-
         });
-
 
 
     }

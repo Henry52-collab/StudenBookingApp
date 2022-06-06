@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Account> accounts;
     AdminAccount admin = new AdminAccount("Admin", "admin123");
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
 
         /**
          * Method called when register button is called, takes the user to register screen
