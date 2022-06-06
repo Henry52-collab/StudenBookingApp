@@ -34,6 +34,7 @@ public class RegisterHome extends AppCompatActivity {
         userType = findViewById(R.id.editUserType);
         registerBtn = findViewById(R.id.idBtnRegister);
 
+
         /**
          * This method is called when register button is clicked.
          * */

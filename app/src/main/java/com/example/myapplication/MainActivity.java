@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("Username2", userName); // EDIT: passes the username to Display activity under the key "username2"
                     // EDIT: if possible, please pass the role to Display activity under the key "Type2"
                     startActivity(intent);
+
                 }
 
 
