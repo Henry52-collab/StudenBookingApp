@@ -22,4 +22,10 @@
     <string name="UserName2">username</string>
     <string name="Continue">Continue</string>
     <string name="Role">role</string>
+    <string name="cancel1">Cancel</string>
+    <string name="confirm1">Confirm</string>
+    <string name="back">Back</string>
+    <string name="edit_course">Edit course</string>
+    <string name="Cancel2">Cancel</string>
+    <string name="SelectCourse">Select a course to edit…</string>
 </resources>

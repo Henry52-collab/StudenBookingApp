@@ -1,15 +1,14 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.EditText;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Account> accounts;
     AdminAccount admin = new AdminAccount("Admin", "admin123");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         register = findViewById(R.id.idBtnRegister);
         database = FirebaseDatabase.getInstance().getReference();
         accounts = new ArrayList<>();
+
         /**
          * This is the onclick method for the login button. If the login button is clicked, this method is called.
          * */
@@ -73,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     /**
