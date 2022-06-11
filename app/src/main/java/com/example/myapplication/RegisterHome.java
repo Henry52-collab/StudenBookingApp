@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,7 +27,7 @@ public class RegisterHome extends AppCompatActivity {
     private EditText usernameEdt,userType, passwordEdt;
     private Button registerBtn;
     private DatabaseReference database;
-
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,44 +38,60 @@ public class RegisterHome extends AppCompatActivity {
         passwordEdt = findViewById(R.id.idEdtPassword);
         userType = findViewById(R.id.editUserType);
         registerBtn = findViewById(R.id.idBtnRegister);
-
-
+        mAuth = FirebaseAuth.getInstance();
         /**
          * This method is called when register button is clicked.
          * */
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String userName = usernameEdt.getText().toString();
-                if(TextUtils.isEmpty(userName))
-                    usernameEdt.setError("Enter a valid username");
-                String password = passwordEdt.getText().toString();
-                if(TextUtils.isEmpty(password))
-                    passwordEdt.setError("Enter a valid password");
-                //Do not change anything above this line
-                //Implement here
+                String userName = usernameEdt.getText().toString().trim();
+                String password = passwordEdt.getText().toString().trim();
                 String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
-                if(TextUtils.isEmpty(type))
+                //Error handling
+                if(TextUtils.isEmpty(userName)){
+                    usernameEdt.setError("Enter a valid username");
+                    usernameEdt.requestFocus();
+                    return;
+                }
+                //password can't be empty
+                if(TextUtils.isEmpty(password)){
+                    passwordEdt.setError("Enter a valid password");
+                    passwordEdt.requestFocus();
+                    return;
+                }
+                //password length can't be less than 6
+                if(password.length() < 6){
+                    passwordEdt.setError("Password length can't be less than 6");
+                    passwordEdt.requestFocus();
+                    return;
+                }
+                //type can't be empty
+                if(TextUtils.isEmpty(type)){
                     userType.setError("Enter a valid password");
-
-                boolean isSuccessful = false; // EDIT: added this but could possibly be removed once more specific error handling is implemented
-                if(type.equals("student")) {
-                    writeNewStudent(type, userName,password);
-                    isSuccessful = true;
+                    userType.requestFocus();
+                    return;
                 }
-                if(type.equals("instructor")) {
-                    writeNewInstructor(type,userName,password);
-                    isSuccessful = true;
-                }
-
-                // EDIT: passes username and type to DisplayMessageActivity before going to said activity
-
-                if (isSuccessful) {
-                    Intent intent = new Intent(RegisterHome.this, DisplayMessageActivity.class);
-                    intent.putExtra("Username", userName);
-                    intent.putExtra("Type", type);
-                    startActivity(intent);
-                }
+                String email = userName + "@firebase.com";
+                //create user and add to database
+                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            switch(type){
+                                case "student":
+                                    writeNewStudent("student",userName,password);
+                                    break;
+                                case "instructor":
+                                    writeNewInstructor("instructor",userName,password);
+                                    break;
+                            }
+                        }
+                        else{
+                            Toast.makeText(RegisterHome.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
         });
     }
@@ -96,16 +117,4 @@ public class RegisterHome extends AppCompatActivity {
     }
 
 
-    /**
-     * Method for writing new admins into database
-     * */
-    //Admins don't need to register, add it straight to database.
-    /*
-    public void writeNewAdmin(String type,String name,String password){
-        Account account = new AdminAccount(name,password);
-        String id = database.push().getKey();
-        database.child(type + 's').child(id).setValue(account);
-        Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
-    }
-    */
 }

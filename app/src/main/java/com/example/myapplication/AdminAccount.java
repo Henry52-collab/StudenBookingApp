@@ -36,9 +36,6 @@ public class AdminAccount extends Account
         database = FirebaseDatabase.getInstance().getReference();
     }
 
-
-
-
     //Getters and setters
     public String getAdminName(){return admin.getUserName();}
     public String getAdminPassword(){return admin.getPassword();}
