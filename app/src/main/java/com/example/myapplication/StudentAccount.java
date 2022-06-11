@@ -6,6 +6,7 @@ package com.example.myapplication;
 public class StudentAccount extends Account{
     private Student student;
     public static final String TYPE = "student";
+    public StudentAccount(){}
     public StudentAccount(String name,String password){
         student = new Student(name,password);
     }
