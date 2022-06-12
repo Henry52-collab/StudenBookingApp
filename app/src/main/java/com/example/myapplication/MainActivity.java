@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     EditText usernameEdt, passwordEdt;
     Intent intent;
     DatabaseReference database;
-    ArrayList<Account> accounts;
     private FirebaseAuth mAuth;
 
     @Override
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.Login);
         register = findViewById(R.id.idBtnRegister);
         database = FirebaseDatabase.getInstance().getReference();
-        accounts = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         /**
          * This is the onclick method for the login button. If the login button is clicked, this method is called.
@@ -77,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
       String userName = usernameEdt.getText().toString().trim();
       String password = passwordEdt.getText().toString().trim();
       String email = userName + "@firebase.com";
+      String type = "student";
       //Error handling
       if(userName.isEmpty()){
           usernameEdt.setError("Please input username");
@@ -93,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void onComplete(@NonNull Task<AuthResult> task) {
             if(task.isSuccessful()){
+                mAuth.getCurrentUser().getDisplayName();
                 Intent intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
                 intent.putExtra("name",userName);
-                //intent.putExtra("type",type);
+                intent.putExtra("type",type);
                 startActivity(intent);
             }
             else{
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
           }
       });
     }
-
 }
 
 
