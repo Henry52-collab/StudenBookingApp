@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,54 +18,59 @@ import com.google.firebase.database.ValueEventListener;
 
 public class adminHome extends AppCompatActivity {
 
-    private Button buttonDeleteCourse;
-    private Button buttonDeleteAccount;
-    private Button buttonCreateCourse;
-    private Button buttonEditCourse;
-
-    private DatabaseReference rootDatabaseref;
-    private DatabaseReference rootDatabaseref2;
-
+    private Button createCourseBtn, viewEditCourseBtn, deleteCourseBtn, deleteAccountBtn;
+    private Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
 
-        buttonDeleteCourse = findViewById(R.id.buttonDeleteCourse);
-        rootDatabaseref = FirebaseDatabase.getInstance().getReference().child("courses");
-        rootDatabaseref2 = FirebaseDatabase.getInstance().getReference().child("students");
+        createCourseBtn = findViewById(R.id.buttonCreateCourse);
+        viewEditCourseBtn = findViewById(R.id.buttonEditCourse);
+        deleteCourseBtn = findViewById(R.id.buttonDeleteCourse);
+        deleteAccountBtn = findViewById(R.id.buttonDeleteAccount);
+        logoutBtn = findViewById(R.id.BtnLogout2);
 
-        buttonDeleteCourse.setOnClickListener(new View.OnClickListener() {
+        /* Set up all buttons to go where needed */
+        createCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                rootDatabaseref.child("N49fHLKdMNzQDEoZoDu").setValue(null);
-
+            public void onClick(View view) {
+                Intent intent = new Intent(adminHome.this, adminCreateCourse.class);
+                startActivity(intent);
             }
         });
 
-
-        /*
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query applesQuery = ref.child("courses").orderByChild("code").equalTo("seg2105");
-
-        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        viewEditCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                    appleSnapshot.getRef().removeValue();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
+            public void onClick(View view) {
+                Intent intent = new Intent(adminHome.this, adminViewCourses.class);
+                startActivity(intent);
             }
         });
 
-         */
+        deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(adminHome.this, adminDeleteCourse.class);
+                startActivity(intent);
+            }
+        });
 
+        deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(adminHome.this, adminDeleteAccount.class);
+                startActivity(intent);
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 

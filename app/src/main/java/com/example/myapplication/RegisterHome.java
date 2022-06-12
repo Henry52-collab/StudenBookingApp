@@ -1,133 +1,165 @@
 package com.example.myapplication;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Locale;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * This class is the backend for the register screen, corresponds to activity_main2.xml.
  * */
 public class RegisterHome extends AppCompatActivity {
-    private EditText usernameEdt,userType, passwordEdt;
-    private Button registerBtn;
-    private DatabaseReference database;
-    private FirebaseAuth mAuth;
+    private EditText usernameEdt,passwordEdt;
+    private String type = "";
+    private Spinner types;
+    private ArrayAdapter viewTypes;
+    private LinkedList<String> usernames = new LinkedList<>();
+    private Button registerBtn, cancelBtn;
+    private DatabaseReference db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        //Make usertype into a dropdown menu, implement it here and in activity_main2.xml.
-        database = FirebaseDatabase.getInstance().getReference();
+
+        /* Initialize all variables */
+        db = FirebaseDatabase.getInstance().getReference();
         usernameEdt = findViewById(R.id.idEdtUserName);
         passwordEdt = findViewById(R.id.idEdtPassword);
-        userType = findViewById(R.id.editUserType);
         registerBtn = findViewById(R.id.idBtnRegister);
-        mAuth = FirebaseAuth.getInstance();
-        /**
-         * This method is called when register button is clicked.
-         * */
+        cancelBtn = findViewById(R.id.Cancel3);
+        types = findViewById(R.id.UserTypeSpinner);
+        usernames.add("admin"); // user cannot create an account with username "admin", even if password is different
+
+        /* Set up spinner to display user types */
+        viewTypes = ArrayAdapter.createFromResource(this, R.array.user_types, android.R.layout.simple_spinner_dropdown_item);
+        types.setAdapter(viewTypes);
+
+        /* Set up listener for spinner; saves whatever type is selected */
+        types.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                type = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        /* Set up listener for database so that we can add all existing usernames into database */
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot student = snapshot.child("students");
+                DataSnapshot instructor = snapshot.child("instructors");
+
+                try {
+                    /* Iterate through list of students in database */
+                    for (DataSnapshot data : student.getChildren()) {
+                        usernames.add(data.getValue(Student.class).getName());
+                    }
+
+                    /* Iterate through list of instructors in database*/
+                    for (DataSnapshot data : instructor.getChildren()) {
+                        usernames.add(data.getValue(Instructor.class).getName());
+                    }
+                } catch (Exception e) {
+                    usernameEdt.setError(e.getCause().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        /* Set up listener for cancel button; returns user to previous page (MainActivity) */
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        /* Set up listener for register button; registers user if all fields are valid */
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString().trim();
                 String password = passwordEdt.getText().toString().trim();
-                String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
-                //Error handling
-                if(TextUtils.isEmpty(userName)){
-                    usernameEdt.setError("Enter a valid username");
-                    usernameEdt.requestFocus();
-                    return;
+
+                boolean isSuccessful = true; // used to check if all fields are valid
+
+                /* Error handling */
+                if(TextUtils.isEmpty(userName)){ // username cannot be empty
+                    usernameEdt.setError("Please enter a username.");
+                    isSuccessful = false;
                 }
-                //password can't be empty
-                if(TextUtils.isEmpty(password)){
-                    passwordEdt.setError("Enter a valid password");
-                    passwordEdt.requestFocus();
-                    return;
+
+                if(password.length() < 6){ //password length can't be less than 6 characters
+                    passwordEdt.setError("Password length cannot be less than 6 characters.");
+                    isSuccessful = false;
                 }
-                //password length can't be less than 6
-                if(password.length() < 6){
-                    passwordEdt.setError("Password length can't be less than 6");
-                    passwordEdt.requestFocus();
+
+                if (usernames.contains(userName)) { // username cannot already exist in database
+                    usernameEdt.setError("An account with this username already exists.");
+                    isSuccessful = false;
+                }
+
+                /* If any field is invalid, return */
+                if (!isSuccessful) {
                     return;
                 }
 
-                //type can't be empty
-                if(TextUtils.isEmpty(type)){
-                    userType.setError("Enter a valid type");
-                    userType.requestFocus();
-                    return;
+                /* Add user to database according to their type */
+                if (type.equals("student")) {
+                    writeNewStudent(userName, password);
+                } else {
+                    writeNewInstructor(userName, password);
                 }
-              
-                // EDIT: passes username and type to DisplayMessageActivity before going to said activity
 
-                if (isSuccessful) {
-                    Intent intent = new Intent(RegisterHome.this, DisplayMessageActivity.class);
-                    intent.putExtra("Username", userName);
-                    intent.putExtra("Type", type);
-                    startActivity(intent);
-                    finish();
+                Intent intent = new Intent(RegisterHome.this, MainActivity.class);
+                startActivity(intent);
+                finish();
 
-                
-                String email = userName + "@firebase.com";
-                //create user and add to database
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            switch(type){
-                                case "student":
-                                    writeNewStudent("student",userName,password);
-                                    break;
-                                case "instructor":
-                                    writeNewInstructor("instructor",userName,password);
-                                    break;
-                            }
-                        }
-                        else{
-                            Toast.makeText(RegisterHome.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
             }
         });
+
     }
 
-    /**
-     * Method for writing new students
-     * */
-    public void writeNewStudent(String type,String name, String password){
-        String id = database.push().getKey();
-        Account account = new StudentAccount(name,password);
-        database.child(type + "s").child(id).setValue(account);
-        Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
+    private void writeNewInstructor(String userName, String password) {
+        Account account = new InstructorAccount(userName, password);
+        String id = db.push().getKey();
+        db.child("instructors").child(id).setValue(account);
+        Toast.makeText(this,"New instructor added",Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * Method for writing new instrutors into database
-     * */
-    public void writeNewInstructor(String type,String name,String password){
-        Account account = new InstructorAccount(name,password);
-        String id = database.push().getKey();
-        database.child(type + "s").child(id).setValue(account);
-        Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
+    private void writeNewStudent(String userName, String password) {
+        String id = db.push().getKey();
+        Account account = new StudentAccount(userName,password);
+        db.child("students").child(id).setValue(account);
+        Toast.makeText(this,"New student added",Toast.LENGTH_SHORT).show();
     }
-
-
-}
+    }
