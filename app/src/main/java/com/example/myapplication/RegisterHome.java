@@ -1,4 +1,3 @@
-package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -112,3 +111,4 @@ public class RegisterHome extends AppCompatActivity {
     }
 
 }
+

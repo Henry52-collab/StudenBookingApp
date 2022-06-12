@@ -5,8 +5,14 @@ package com.example.myapplication;
  * */
 public class Course {
 
-    private String code;
-    private String name;
+    public String code; // needed to make these public as well
+    public String name;
+
+    public Course() {
+        // default constructor; do not remove as this is needed for
+        // the getValue method.
+    }
+
     //constructor
     public Course(String code,String name){
         this.code = code;
