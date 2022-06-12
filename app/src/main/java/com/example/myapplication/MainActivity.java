@@ -27,6 +27,8 @@ import java.util.ArrayList;
  * This is the back end for the login screen, corresponds to activity_main.xml
  * */
 public class MainActivity extends AppCompatActivity {
+
+
     Button login, register;
     EditText usernameEdt, passwordEdt;
     Intent intent;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         usernameEdt = findViewById(R.id.editTextTextPersonName);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         accounts = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
+
         /**
          * This is the onclick method for the login button. If the login button is clicked, this method is called.
          * */
