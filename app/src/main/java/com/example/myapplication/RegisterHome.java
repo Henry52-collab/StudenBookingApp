@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,12 +67,24 @@ public class RegisterHome extends AppCompatActivity {
                     passwordEdt.requestFocus();
                     return;
                 }
+
                 //type can't be empty
                 if(TextUtils.isEmpty(type)){
-                    userType.setError("Enter a valid password");
+                    userType.setError("Enter a valid type");
                     userType.requestFocus();
                     return;
                 }
+              
+                // EDIT: passes username and type to DisplayMessageActivity before going to said activity
+
+                if (isSuccessful) {
+                    Intent intent = new Intent(RegisterHome.this, DisplayMessageActivity.class);
+                    intent.putExtra("Username", userName);
+                    intent.putExtra("Type", type);
+                    startActivity(intent);
+                    finish();
+
+                
                 String email = userName + "@firebase.com";
                 //create user and add to database
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -3,7 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/drawable/course_view_border.xml" value="0.253" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/drawable/spinner_background.xml" value="0.2165" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_admin_create_course.xml" value="0.25" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_admin_edit_course.xml" value="0.33" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_admin_home.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_admin_view_courses.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_admin_view_edit_courses.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_display_message.xml" value="0.33" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_instructor_home.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_main.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Gary/StudenBookingApp/app/src/main/res/layout/activity_student_home.xml" value="0.26510416666666664" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_display_message.xml" value="0.264" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_login.xml" value="0.4" />
