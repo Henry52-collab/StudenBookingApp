@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Account> accounts;
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
