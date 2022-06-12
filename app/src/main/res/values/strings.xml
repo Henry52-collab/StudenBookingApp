@@ -28,4 +28,9 @@
     <string name="edit_course">Edit course</string>
     <string name="Cancel2">Cancel</string>
     <string name="SelectCourse">Select a course to edit…</string>
+    <string name="register_user">Register</string>
+    <string-array name="user_types">
+        <item>student</item>
+        <item>instructor</item>
+    </string-array>
 </resources>

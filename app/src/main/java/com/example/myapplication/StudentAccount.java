@@ -4,7 +4,7 @@ package com.example.myapplication;
  * Student functionality for deliverable 3.
  * */
 public class StudentAccount extends Account{
-    private Student student;
+    public Student student;
     public static final String TYPE = "student";
     public StudentAccount(){}
     public StudentAccount(String name,String password){
