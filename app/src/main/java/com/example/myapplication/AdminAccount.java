@@ -56,20 +56,12 @@ public class AdminAccount extends Account
 
 
     /**
-     * This method deletes the course from the database
-     * @param name name of the course
-     * */
-    public void deleteCourseName(String name){
-        //implement
-    }
-
-
-    /**
      * This course delete the course by code
-     * @param code code of the course
+     * @param key is the key used to access the course in the database.
      * */
-    public void deleteCourseByCode(String code){
-        return;
+    public static void deleteCourse(String key){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("courses").child(key);
+        db.removeValue();
     }
 
 
