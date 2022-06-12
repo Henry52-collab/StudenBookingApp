@@ -43,64 +43,54 @@ public class RegisterHome extends AppCompatActivity {
         /**
          * This method is called when register button is clicked.
          * */
-        registerBtn.setOnClickListener(new View.OnClickListener(){
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString().trim();
                 String password = passwordEdt.getText().toString().trim();
                 String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
                 //Error handling
-                if(TextUtils.isEmpty(userName)){
+                if (TextUtils.isEmpty(userName)) {
                     usernameEdt.setError("Enter a valid username");
                     usernameEdt.requestFocus();
                     return;
                 }
                 //password can't be empty
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     passwordEdt.setError("Enter a valid password");
                     passwordEdt.requestFocus();
                     return;
                 }
                 //password length can't be less than 6
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     passwordEdt.setError("Password length can't be less than 6");
                     passwordEdt.requestFocus();
                     return;
                 }
 
                 //type can't be empty
-                if(TextUtils.isEmpty(type)){
+                if (TextUtils.isEmpty(type)) {
                     userType.setError("Enter a valid type");
                     userType.requestFocus();
                     return;
                 }
               
                 // EDIT: passes username and type to DisplayMessageActivity before going to said activity
-
-                if (isSuccessful) {
-                    Intent intent = new Intent(RegisterHome.this, DisplayMessageActivity.class);
-                    intent.putExtra("Username", userName);
-                    intent.putExtra("Type", type);
-                    startActivity(intent);
-                    finish();
-
-                
                 String email = userName + "@firebase.com";
                 //create user and add to database
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            switch(type){
+                        if (task.isSuccessful()) {
+                            switch (type) {
                                 case "student":
-                                    writeNewStudent("student",userName,password);
+                                    writeNewStudent("student", userName, password);
                                     break;
                                 case "instructor":
-                                    writeNewInstructor("instructor",userName,password);
+                                    writeNewInstructor("instructor", userName, password);
                                     break;
                             }
-                        }
-                        else{
+                        } else {
                             Toast.makeText(RegisterHome.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -127,7 +117,6 @@ public class RegisterHome extends AppCompatActivity {
         String id = database.push().getKey();
         database.child(type + "s").child(id).setValue(account);
         Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
-    }
-
+        }
 
 }
