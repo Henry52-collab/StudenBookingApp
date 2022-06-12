@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * This class is the Welcome Screen, and corresponds to activity_display_message.xml.
  * By pressing Continue, the app moves to a home screen based on the user's role.
@@ -92,7 +94,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
                 j.putExtra("Username", finalName);
                 startActivity(j);
-                finish();
             }
 
         });
