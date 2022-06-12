@@ -1,3 +1,4 @@
+
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
@@ -27,17 +28,14 @@ import java.util.ArrayList;
  * This is the back end for the login screen, corresponds to activity_main.xml
  * */
 public class MainActivity extends AppCompatActivity {
-
-
     Button login, register;
     EditText usernameEdt, passwordEdt;
     Intent intent;
     DatabaseReference database;
     ArrayList<Account> accounts;
-
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         usernameEdt = findViewById(R.id.editTextTextPersonName);
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         register = findViewById(R.id.idBtnRegister);
         database = FirebaseDatabase.getInstance().getReference();
         accounts = new ArrayList<>();
-
+        mAuth = FirebaseAuth.getInstance();
         /**
          * This is the onclick method for the login button. If the login button is clicked, this method is called.
          * */
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 //Checking if the credentials are valid, if not, showing a warning
-              //loginUser();
+              loginUser();
             }
         });
 
@@ -90,7 +88,20 @@ public class MainActivity extends AppCompatActivity {
           passwordEdt.requestFocus();
           return;
       }
-
+      //Authenticate user
+      mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+          @Override
+          public void onComplete(@NonNull Task<AuthResult> task) {
+            if(task.isSuccessful()){
+                Intent intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
+                //intent.putExtra("name",userName);
+                //intent.putExtra("type",type);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this,"Failed to login",Toast.LENGTH_LONG).show();
+            }
+          }
+      });
     }
-
 }
