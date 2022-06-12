@@ -28,6 +28,7 @@ public class RegisterHome extends AppCompatActivity {
     private Button registerBtn;
     private DatabaseReference database;
     private FirebaseAuth mAuth;
+    private Button backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,18 @@ public class RegisterHome extends AppCompatActivity {
         userType = findViewById(R.id.editUserType);
         registerBtn = findViewById(R.id.idBtnRegister);
         mAuth = FirebaseAuth.getInstance();
+        backBtn = findViewById(R.id.button);
+       /**
+        * BackButton
+        * */
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(RegisterHome.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
         /**
          * This method is called when register button is clicked.
          * */
@@ -80,10 +93,12 @@ public class RegisterHome extends AppCompatActivity {
                         if(task.isSuccessful()){
                             switch(type){
                                 case "student":
-                                    writeNewStudent("student",userName,password);
+                                    User student = new User(userName,password,"student");
+                                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(student);
                                     break;
                                 case "instructor":
-                                    writeNewInstructor("instructor",userName,password);
+                                    User instructor = new User(userName,password,"instructor");
+                                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(instructor);
                                     break;
                             }
                         }
@@ -95,26 +110,5 @@ public class RegisterHome extends AppCompatActivity {
             }
         });
     }
-
-    /**
-     * Method for writing new students
-     * */
-    public void writeNewStudent(String type,String name, String password){
-        String id = database.push().getKey();
-        Account account = new StudentAccount(name,password);
-        database.child(type + "s").child(id).setValue(account);
-        Toast.makeText(this,type + " added",Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Method for writing new instrutors into database
-     * */
-    public void writeNewInstructor(String type,String name,String password){
-        Account account = new InstructorAccount(name,password);
-        String id = database.push().getKey();
-        database.child(type + "s").child(id).setValue(account);
-        Toast.makeText(this,type + " added",Toast.LENGTH_LONG).show();
-    }
-
 
 }

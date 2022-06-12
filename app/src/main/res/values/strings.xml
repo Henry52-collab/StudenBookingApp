@@ -22,4 +22,5 @@
     <string name="UserName2">username</string>
     <string name="Continue">Continue</string>
     <string name="Role">role</string>
+    <string name="Back">Back</string>
 </resources>

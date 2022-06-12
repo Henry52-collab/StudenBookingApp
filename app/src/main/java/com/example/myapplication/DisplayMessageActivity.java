@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 /**
  * This class is the Welcome Screen, and corresponds to activity_display_message.xml.
  * By pressing Continue, the app moves to a home screen based on the user's role.
@@ -28,10 +30,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private Button logoutBtn;
     private Button continueBtn;
     private FirebaseUser user;
-    private DatabaseReference studentReference;
     private String uID;
-    private DatabaseReference instructorReference;
-    private DatabaseReference adminReference;
+    private DatabaseReference users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,100 +39,43 @@ public class DisplayMessageActivity extends AppCompatActivity {
         logoutBtn = (Button) findViewById(R.id.BtnLogout);
         continueBtn = (Button) findViewById(R.id.continueBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        studentReference = FirebaseDatabase.getInstance().getReference("students");
-        instructorReference = FirebaseDatabase.getInstance().getReference("instructors");
-        adminReference = FirebaseDatabase.getInstance().getReference("admin");
         uID = user.getUid();
         final TextView username = findViewById(R.id.idTVUserName);
         final TextView role = findViewById(R.id.Role);
-        studentReference.child(uID).addValueEventListener(new ValueEventListener() {
+        users = FirebaseDatabase.getInstance().getReference("Users");
+        users.child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StudentAccount student = snapshot.getValue(StudentAccount.class);
-                if(student != null){
-                    String name = student.getStudentName();
-                    String type = "Student";
+                User user = snapshot.getValue(User.class);
+                if(user != null){
+                    String name = user.getName();
+                    String type = user.getType();
                     username.setText(name);
                     role.setText(type);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DisplayMessageActivity.this,"Error occurred",Toast.LENGTH_LONG).show();
-            }
-        });
+                    if(type.equals("admin")){
+                        Intent intent = new Intent(DisplayMessageActivity.this,adminHome.class);
+                        startActivity(intent);
+                    }
 
-        adminReference.child(uID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                AdminAccount admin = snapshot.getValue(AdminAccount.class);
-                if(admin != null){
-                    String name = admin.getAdminName();
-                    String type = "Admin";
-                    username.setText(name);
-                    role.setText(type);
+
                 }
+                else username.setText("Empty");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DisplayMessageActivity.this,"Error occurred",Toast.LENGTH_LONG).show();
             }
         });
-
-        instructorReference.child(uID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                InstructorAccount instructor = snapshot.getValue(InstructorAccount.class);
-                if(instructor != null){
-                    String name = instructor.getInstructorName();
-                    String type = "Instructor";
-                    username.setText(name);
-                    role.setText(type);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DisplayMessageActivity.this,"Error occurred",Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
-
-
-
-        /* Set username and role TextView to the respective username and role of user */
-/*
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        String userName = intent.getStringExtra("name");
-        String name = "";
-        String type = "";
-        try {
-            if (extras.containsKey("Username2")) { // user reached welcome page via login
-                name = intent.getStringExtra("Username2");
-                type = intent.getStringExtra("Type2");
-            } else { // user reached welcome page via register
-                name = intent.getStringExtra("Username");
-                type = intent.getStringExtra("Type");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Extras is null");
-        }
-
-        username.setText(userName);
-        role.setText(type);
 
         logoutBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               Intent i = new Intent(DisplayMessageActivity.this,MainActivity.class);
-               startActivity(i);
-               finish();
+                Intent i = new Intent(DisplayMessageActivity.this,MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
-
+        String name = "";
+        String type = "";
         String finalType = type;
         String finalName = name;
         continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -151,13 +94,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 startActivity(j);
                 finish();
             }
-
-
         });
-*/
-
     }
-
-
-
 }

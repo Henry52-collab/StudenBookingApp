@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     ArrayList<Account> accounts;
     private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
           public void onComplete(@NonNull Task<AuthResult> task) {
             if(task.isSuccessful()){
                 Intent intent = new Intent(MainActivity.this,DisplayMessageActivity.class);
-                intent.putExtra("name",userName);
+                //intent.putExtra("name",userName);
                 //intent.putExtra("type",type);
                 startActivity(intent);
             }
