@@ -44,15 +44,6 @@ public class adminHome extends AppCompatActivity {
         });
 
 
-        buttonDeleteAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rootDatabaseref.child("N49fHLKdMNzQDEoZoDu").setValue(null);
-
-            }
-        });
-
-
         /*
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
