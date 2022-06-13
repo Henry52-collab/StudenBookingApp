@@ -68,21 +68,4 @@ public class AdminAccount extends Account
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Users").child(key);
         db.removeValue();
     }
-    /**
-     * This method deletes an instructor from the database
-     * @param name name of the instructor
-     * */
-    public void deleteInstructor(String name){
-        //implement
-    }
-
-    /**
-     * This methhod deletes a student from the database
-     * @param name name of the student
-     * */
-    public void deleteStudent(String name){
-        //implement
-    }
-
-
 }
