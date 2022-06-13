@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -36,7 +37,6 @@ public class adminCreateCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_course);
-
         /* Initialize all variables */
         cancelBtn = findViewById(R.id.Cancel1);
         confirmBtn = findViewById(R.id.Confirm1);
@@ -50,9 +50,9 @@ public class adminCreateCourse extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 codes.clear();
                 if (snapshot.exists()) {
-                   for (DataSnapshot data: snapshot.getChildren()) { // loop through each child (course)
+                    for (DataSnapshot data: snapshot.getChildren()) { // loop through each child (course)
                         codes.add(data.getValue(Course.class).getCode()); // add their course code into codes
-                   }
+                    }
                 }
             }
 
@@ -102,8 +102,4 @@ public class adminCreateCourse extends AppCompatActivity {
 
 
     }
-
-
-
-
 }

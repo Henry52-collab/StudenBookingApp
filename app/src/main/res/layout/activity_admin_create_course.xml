@@ -17,9 +17,10 @@
         android:hint="Enter course code here..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.339"
+        app:layout_constraintTop_toBottomOf="@+id/createCourseTitle"
+        app:layout_constraintVertical_bias="0.071"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -32,9 +33,10 @@
         android:hint="Enter course name here..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467"
+        app:layout_constraintTop_toBottomOf="@+id/courseCode"
+        app:layout_constraintVertical_bias="0.107"
         tools:ignore="HardcodedText" />
 
     <Button

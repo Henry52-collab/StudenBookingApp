@@ -42,9 +42,10 @@ public class adminDeleteCourse extends AppCompatActivity {
         setContentView(R.layout.activity_admin_delete_course);
 
         /* Initialize buttons */
-        cancelBtn = findViewById(R.id.Cancel4);
-        deleteBtn = findViewById(R.id.DeleteCourse);
-        viewCodes = findViewById(R.id.courseSpinner);
+        cancelBtn = findViewById(R.id.idBtnCancel);
+        deleteBtn = findViewById(R.id.idBtnDelete);
+        viewCodes = findViewById(R.id.CourseSpinner);
+
         db = FirebaseDatabase.getInstance().getReference().child("courses");
 
         /* Create db listener to get course codes from database */
@@ -54,7 +55,8 @@ public class adminDeleteCourse extends AppCompatActivity {
 
                 codes.clear();
                 for (DataSnapshot data: snapshot.getChildren()) {
-                      codes.add(data.getValue(Course.class).getCode());
+                    codes.add(data.getValue(Course.class).getCode());
+
                 }
                 /* Use an adapter to display the course codes in the spinner */
                 adapter = new ArrayAdapter<>(adminDeleteCourse.this, android.R.layout.simple_spinner_dropdown_item, codes);
@@ -74,15 +76,16 @@ public class adminDeleteCourse extends AppCompatActivity {
                 String selectedCourse = adapterView.getItemAtPosition(i).toString();
                 q = db.orderByChild("code").equalTo(selectedCourse); // query looks for course with the selected course code
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                      for (DataSnapshot data : snapshot.getChildren()) {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()) {
                             key = data.getKey(); // save key
-                      }
-                }
+                        }
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 

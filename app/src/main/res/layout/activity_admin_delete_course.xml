@@ -20,10 +20,13 @@
         tools:ignore="HardcodedText" />
 
     <Spinner
-        android:id="@+id/courseSpinner"
+        android:id="@+id/CourseSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:contentDescription="@string/Continue"
+        android:minHeight="48dp"
+        android:text="@string/Courses"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +48,8 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/Cancel4"
+        android:id="@+id/idBtnCancel"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Cancel2"
@@ -57,9 +61,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.60" />
-
     <Button
-        android:id="@+id/DeleteCourse"
+        android:id="@+id/idBtnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Course"
