@@ -13,6 +13,7 @@ public class Course {
         this.name = name;
     }
 
+    public Course(){}
     //getters and setters
     public String getCode(){
         return code;

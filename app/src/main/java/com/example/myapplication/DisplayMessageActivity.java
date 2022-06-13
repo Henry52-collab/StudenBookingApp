@@ -55,9 +55,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     if(type.equals("admin")){
                         Intent intent = new Intent(DisplayMessageActivity.this,adminHome.class);
                         startActivity(intent);
+                        finish();
                     }
-
-
                 }
                 else username.setText("Empty");
             }
@@ -74,6 +73,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 finish();
             }
         });
+        /*
         String name = "";
         String type = "";
         String finalType = type;
@@ -89,11 +89,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 } else { // admin
                     j = new Intent(DisplayMessageActivity.this, adminHome.class);
                 }
-
                 j.putExtra("Username", finalName);
                 startActivity(j);
                 finish();
             }
         });
+        */
     }
 }

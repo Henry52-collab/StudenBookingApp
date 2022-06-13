@@ -23,4 +23,12 @@
     <string name="Continue">Continue</string>
     <string name="Role">role</string>
     <string name="Back">Back</string>
+    <string name="Cancel2">Cancel</string>
+    <string name="confirm1">Confirm</string>
+    <string name="cancel1">Cancel</string>
+    <string name="SelectCourse">SelectCourse</string>
+    <string name="edit_course">edit course</string>
+    <string name="back">back</string>
+    <string name="Courses">SelectCourse</string>
+    <string name="Accounts">SelectAccount</string>
 </resources>
