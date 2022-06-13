@@ -45,6 +45,7 @@ public class adminDeleteCourse extends AppCompatActivity {
         cancelBtn = findViewById(R.id.idBtnCancel);
         deleteBtn = findViewById(R.id.idBtnDelete);
         viewCodes = findViewById(R.id.CourseSpinner);
+
         db = FirebaseDatabase.getInstance().getReference().child("courses");
 
         /* Create db listener to get course codes from database */
@@ -55,6 +56,7 @@ public class adminDeleteCourse extends AppCompatActivity {
                 codes.clear();
                 for (DataSnapshot data: snapshot.getChildren()) {
                     codes.add(data.getValue(Course.class).getCode());
+
                 }
                 /* Use an adapter to display the course codes in the spinner */
                 adapter = new ArrayAdapter<>(adminDeleteCourse.this, android.R.layout.simple_spinner_dropdown_item, codes);
@@ -83,6 +85,7 @@ public class adminDeleteCourse extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 
