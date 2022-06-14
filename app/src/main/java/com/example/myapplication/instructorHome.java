@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * A class for instructorHome
+ * */
 public class instructorHome extends AppCompatActivity {
 
     @Override
