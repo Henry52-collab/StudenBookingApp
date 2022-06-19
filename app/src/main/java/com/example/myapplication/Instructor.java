@@ -18,7 +18,6 @@ public class Instructor extends User {
         this.name = name;
         this.password = password;
     }
-    public Instructor(){}
 
     /**
      * Method for assigning the instructor name to the selected course.

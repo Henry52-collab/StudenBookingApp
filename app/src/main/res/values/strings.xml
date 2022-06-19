@@ -28,7 +28,6 @@
     <string name="cancel1">Cancel</string>
     <string name="SelectCourse">SelectCourse</string>
     <string name="edit_course">edit course</string>
-    <string name="back">back</string>
     <string name="Courses">SelectCourse</string>
     <string name="Accounts">SelectAccount</string>
     <string name="InstructorHome">InstructorHome</string>
@@ -42,4 +41,8 @@
     <string name="AssignSelf">Assign</string>
     <string name="Unassign">Unassign</string>
     <string name="query1">Please select a course you\'d like to assign/unassign yourself to</string>
+    <string-array name="userTypes">
+        <item>student</item>
+        <item>instructor</item>
+    </string-array>
 </resources>

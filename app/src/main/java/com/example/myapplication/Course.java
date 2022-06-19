@@ -29,14 +29,6 @@ public class Course {
         this.capacity = 100;
     }
 
-    public String getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(String instructor) {
-        this.instructor = instructor;
-    }
-
     public Course(String code, String name, String instructor, int day,int capacity,int hour,String description){
         this.code = code;
         this.name = name;
@@ -45,7 +37,14 @@ public class Course {
         this.capacity = capacity;
         this.hour = hour;
         this.day = day;
+    }
 
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
     }
 
     public String getDescription() {
@@ -80,8 +79,6 @@ public class Course {
         this.capacity = capacity;
     }
 
-    public Course(){}
-    //getters and setters
     public String getCode(){
         return code;
     }

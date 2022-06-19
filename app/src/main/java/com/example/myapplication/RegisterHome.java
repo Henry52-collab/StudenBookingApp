@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,9 +26,12 @@ import java.util.Locale;
  * This class is the backend for the register screen, corresponds to activity_main2.xml.
  * */
 public class RegisterHome extends AppCompatActivity {
-    private EditText usernameEdt,userType, passwordEdt;
+    private EditText usernameEdt, passwordEdt;
+    private Spinner userType;
     private Button registerBtn;
     private DatabaseReference database;
+    private String type;
+    private ArrayAdapter adapter;
     private FirebaseAuth mAuth;
     private Button backBtn;
     @Override
@@ -36,18 +42,33 @@ public class RegisterHome extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         usernameEdt = findViewById(R.id.idEdtUserName);
         passwordEdt = findViewById(R.id.idEdtPassword);
-        userType = findViewById(R.id.editUserType);
+        userType = findViewById(R.id.UserTypeSpinner);
         registerBtn = findViewById(R.id.idBtnRegister);
         mAuth = FirebaseAuth.getInstance();
         backBtn = findViewById(R.id.button);
+
+        /* set up dropdown menu for user type*/
+        adapter = ArrayAdapter.createFromResource(RegisterHome.this, R.array.userTypes, android.R.layout.simple_spinner_dropdown_item);
+        userType.setAdapter(adapter);
+
+        userType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                type = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
        /**
         * BackButton
         * */
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent i = new Intent(RegisterHome.this,MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 
@@ -59,31 +80,21 @@ public class RegisterHome extends AppCompatActivity {
             public void onClick(View v) {
                 String userName = usernameEdt.getText().toString().trim();
                 String password = passwordEdt.getText().toString().trim();
-                String type = userType.getText().toString().trim().toLowerCase(Locale.ROOT);
+
                 //Error handling
                 if(TextUtils.isEmpty(userName)){
                     usernameEdt.setError("Enter a valid username");
                     usernameEdt.requestFocus();
                     return;
                 }
-                //password can't be empty
-                if(TextUtils.isEmpty(password)){
-                    passwordEdt.setError("Enter a valid password");
-                    passwordEdt.requestFocus();
-                    return;
-                }
+
                 //password length can't be less than 6
-                if(password.length() < 6){
+                if(password.length() <= 6){
                     passwordEdt.setError("Password length can't be less than 6");
                     passwordEdt.requestFocus();
                     return;
                 }
-                //type can't be empty
-                if(TextUtils.isEmpty(type)){
-                    userType.setError("Enter a valid password");
-                    userType.requestFocus();
-                    return;
-                }
+
                 String email = userName + "@firebase.com";
                 //create user and add to database
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
