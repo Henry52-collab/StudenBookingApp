@@ -53,8 +53,9 @@ public class adminDeleteAccount extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 names.clear();
                 for (DataSnapshot data: snapshot.getChildren()) {
-                    names.add(data.getValue(User.class).getName());
+                    if(!data.getValue(User.class).getType().equals("admin")) names.add(data.getValue(User.class).getName());
                 }
+              
                 /* Use an adapter to display the course codes in the spinner */
                 adapter = new ArrayAdapter<>(adminDeleteAccount.this, android.R.layout.simple_spinner_dropdown_item, names);
                 viewNames.setAdapter(adapter);

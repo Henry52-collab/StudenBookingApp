@@ -31,4 +31,15 @@
     <string name="back">back</string>
     <string name="Courses">SelectCourse</string>
     <string name="Accounts">SelectAccount</string>
+    <string name="InstructorHome">InstructorHome</string>
+    <string name="Query">What would you like to do?</string>
+    <string name="ViewCourses">View Courses</string>
+    <string name="SearchCourse">Search Course</string>
+    <string name="assign">Assign/unassign</string>
+    <string name="Edit_course">Edit Course</string>
+    <string name="Assign">Assign/Unassign</string>
+    <string name="query">Please select a course</string>
+    <string name="AssignSelf">Assign</string>
+    <string name="Unassign">Unassign</string>
+    <string name="query1">Please select a course you\'d like to assign/unassign yourself to</string>
 </resources>

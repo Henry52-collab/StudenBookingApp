@@ -30,11 +30,23 @@
             android:name=".adminDeleteCourse"
             android:exported="false" />
         <activity
-            android:name=".instructorHome"
+            android:name=".InstructorEditCourse"
             android:exported="false" />
         <activity
+            android:name=".InstructorViewCourse"
+            android:exported="false" />
+        <activity
+            android:name=".InstructorSearchCourse"
+            android:exported="false" />
+        <activity
+            android:name=".InstructorAssignCourse"
+            android:exported="false" />
+        <activity
+            android:name=".instructorHome"
+            android:exported="false" />
+        <activity 
             android:name=".adminHome"
-             />
+            android:exported="false"/>
         <activity
             android:name=".studentHome"
             android:exported="false" />
