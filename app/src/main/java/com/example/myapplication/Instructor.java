@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
  * A class for instructor
  * */
 public class Instructor extends User {
+    public Instructor() {}
     public Instructor(String name,String password){
         this.name = name;
         this.password = password;

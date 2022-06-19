@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * This class is the home for the instructor.
  * Corresponds to activity_instructor_home.xml.
- * */
+ */
 public class instructorHome extends AppCompatActivity {
     private Button search;
     private Button view;

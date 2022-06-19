@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.ArrayList;
+
 
 /**
  * This class is the Welcome Screen, and corresponds to activity_display_message.xml.
@@ -42,6 +44,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         uID = user.getUid();
         final TextView username = findViewById(R.id.idTVUserName);
         final TextView role = findViewById(R.id.Role);
+
         users = FirebaseDatabase.getInstance().getReference("Users");
         users.child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,6 +74,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         });
 
+
         logoutBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(DisplayMessageActivity.this,MainActivity.class);
@@ -98,6 +102,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 startActivity(j);
                 finish();
             }
+
         });
         */
     }

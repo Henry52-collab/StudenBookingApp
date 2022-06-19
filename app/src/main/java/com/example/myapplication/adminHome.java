@@ -16,6 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * A class for adminHome
+ * */
 public class adminHome extends AppCompatActivity {
 
     private Button createCourseBtn, viewEditCourseBtn, deleteCourseBtn, deleteAccountBtn;

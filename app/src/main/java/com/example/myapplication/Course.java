@@ -12,6 +12,12 @@ public class Course {
     private int hour;
     private int day;
     private int capacity;
+
+    public Course() {
+        // default constructor; do not remove as this is needed for
+        // the getValue method.
+    }
+
     //constructor
     public Course(String code,String name){
         this.code = code;
@@ -22,8 +28,6 @@ public class Course {
         this.day = 100;
         this.capacity = 100;
     }
-
-    public Course(){}
 
     public String getInstructor() {
         return instructor;
@@ -76,6 +80,7 @@ public class Course {
         this.capacity = capacity;
     }
 
+    public Course(){}
     //getters and setters
     public String getCode(){
         return code;
