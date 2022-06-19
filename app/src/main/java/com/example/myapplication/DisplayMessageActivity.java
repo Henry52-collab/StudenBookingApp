@@ -57,6 +57,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
+                    if(type.equals("instructor")){
+                        Intent intent = new Intent(DisplayMessageActivity.this,instructorHome.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 else username.setText("Empty");
             }

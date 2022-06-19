@@ -9,17 +9,22 @@
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_create_course.xml" value="0.264" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_delete_account.xml" value="0.264" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_delete_course.xml" value="0.264" />
-        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_edit_course.xml" value="0.1" />
-        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_home.xml" value="0.2" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_edit_course.xml" value="0.264" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_home.xml" value="0.264" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_view_course.xml" value="0.25416666666666665" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_admin_view_courses.xml" value="0.25416666666666665" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_display_message.xml" value="0.264" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_edit_course.xml" value="0.25416666666666665" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_instructor_assign_course.xml" value="0.264" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_instructor_home.xml" value="0.25416666666666665" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_main2.xml" value="0.2375" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_register.xml" value="0.2375" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_register2.xml" value="0.2375" />
         <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_register3.xml" value="0.2375" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_search_course.xml" value="0.24010416666666667" />
+        <entry key="..\:/uOttawa/Second year/MyApplication/app/src/main/res/layout/activity_view_course.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/layout/activity_admin_home.xml" value="0.2947916666666667" />
