@@ -99,7 +99,12 @@ public class Course {
      * return a string representation of the course
      * */
     public String toString(){
-        return "CourseCode: " + code + "/n" + "CourseName: " + name;
+        return "\nCourse Code: " + code + "\n" + "Course Name: " + name + "\n" + "Instructor: " + instructor + "\n";
+    }
+
+    public String getDetail() {
+        return "Course Code: " + code + "\n" + "Course Name: " + name + "\n" + "Instructor: " + instructor + "\n"
+                + "Course Description: " + description + "\n" + "Hours: " + hour + "\n" + "Days: " + day + "\n" + "Capacity: " + capacity;
     }
 
     /**

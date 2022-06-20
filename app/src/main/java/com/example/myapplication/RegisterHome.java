@@ -109,6 +109,8 @@ public class RegisterHome extends AppCompatActivity {
                                 case "instructor":
                                     User instructor = new User(userName,password,"instructor");
                                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(instructor);
+                                    Intent i = new Intent(getApplicationContext(), instructorHome.class);
+                                    startActivity(i);
                                     break;
                             }
                         }

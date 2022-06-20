@@ -128,7 +128,7 @@ public class InstructorAssignCourse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!oldInstructor.equals("")) {
-                    Toast.makeText(InstructorAssignCourse.this, "unable to assign", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InstructorAssignCourse.this, "Unable to Assign", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Instructor.assign(key,name);
