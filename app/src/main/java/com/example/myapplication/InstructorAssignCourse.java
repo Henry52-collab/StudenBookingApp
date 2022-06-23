@@ -83,6 +83,7 @@ public class InstructorAssignCourse extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                course.clear();
                 for (DataSnapshot data:snapshot.getChildren()) {
                      course.add(data.getValue(Course.class).getCode());
                 }
@@ -128,7 +129,7 @@ public class InstructorAssignCourse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!oldInstructor.equals("")) {
-                    Toast.makeText(InstructorAssignCourse.this, "Unable to Assign", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InstructorAssignCourse.this, "Unable to Assign, current instructor is " + oldInstructor, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Instructor.assign(key,name);
