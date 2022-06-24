@@ -9,6 +9,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 /**
  * A class for instructor
  * */
@@ -30,6 +32,7 @@ public class Instructor extends User {
         courses.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 Course course = snapshot.getValue(Course.class);
                 courses.child(key).setValue(new Course(course.getCode(),course.getName(),name,course.getDay(),course.getCapacity(),course.getHour(),course.getDescription()));
             }
@@ -47,7 +50,7 @@ public class Instructor extends User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Course course = snapshot.getValue(Course.class);
-                courses.child(key).setValue(new Course(course.getCode(),course.getName(),"",0,0,0,""));
+                courses.child(key).setValue(new Course(course.getCode(),course.getName(),"", "",100, "",""));
             }
 
             @Override
@@ -55,5 +58,17 @@ public class Instructor extends User {
 
             }
         });
+    }
+
+    /**
+     * Edits the course at the given key by setting it as the course provided.
+     * @param key is the key used to access the course to be edited
+     * @param course is the course containing the information the user wants the edited
+     *               course to have.
+     */
+    public static void editCourse(String key, Course course) {
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("courses");
+        db.child(key).setValue(course);
     }
 }

@@ -45,4 +45,12 @@
         <item>student</item>
         <item>instructor</item>
     </string-array>
+    <string-array name="daysOfTheWeek">
+        <item>none</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
 </resources>
