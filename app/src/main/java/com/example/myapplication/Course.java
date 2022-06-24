@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import java.util.ArrayList;
+
 /**
  * This is the course class
  * */
@@ -9,8 +11,8 @@ public class Course {
     private String name;
     private String instructor;
     private String description;
-    private int hour;
-    private int day;
+    private String hours;
+    private String days;
     private int capacity;
 
     public Course() {
@@ -24,19 +26,19 @@ public class Course {
         this.name = name;
         this.instructor = "";
         this.description = "";
-        this.hour = 100;
-        this.day = 100;
+        this.hours = "";
+        this.days = "";
         this.capacity = 100;
     }
 
-    public Course(String code, String name, String instructor, int day,int capacity,int hour,String description){
+    public Course(String code, String name, String instructor, String days,int capacity, String hours,String description){
         this.code = code;
         this.name = name;
         this.instructor = instructor;
         this.description = description;
         this.capacity = capacity;
-        this.hour = hour;
-        this.day = day;
+        this.hours = hours;
+        this.days = days;
     }
 
     public String getInstructor() {
@@ -54,21 +56,20 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public int getHour() {
-        return hour;
+    public String getHour() {
+        return hours;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
+    public void setHour(String hours) {
+        this.hours = hours;
     }
 
-    public int getDay() {
-        return day;
+    public String getDay() {
+        return days;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setDay(String days) {
+        this.days = days;
     }
 
     public int getCapacity() {
@@ -103,8 +104,23 @@ public class Course {
     }
 
     public String getDetail() {
-        return "Course Code: " + code + "\n" + "Course Name: " + name + "\n" + "Instructor: " + instructor + "\n"
-                + "Course Description: " + description + "\n" + "Hours: " + hour + "\n" + "Days: " + day + "\n" + "Capacity: " + capacity;
+
+        StringBuilder info = new StringBuilder();
+        info.append("Course code: " + code + "\nCourse Name: " + name + "\nInstructor: " + instructor + "\nTimes: ");
+
+        if (!days.equals("")) {
+            String[] arr1 = days.split(" ", 2);
+            String[] arr2 = hours.split(" ", 2);
+            info.append(arr1[0] + ", " + arr2[0]);
+
+            if (arr1.length > 1 && !arr1[1].equals("")) {
+                info.append("; " + arr1[1] + ", " + arr2[1]);
+            }
+        }
+
+        info.append("\nCapacity: " + capacity + "\nCourse Description: " + description);
+
+        return info.toString();
     }
 
     /**
