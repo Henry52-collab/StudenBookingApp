@@ -29,8 +29,7 @@ import java.util.ArrayList;
  * everything else should be fully implemented.
  */
 public class DisplayMessageActivity extends AppCompatActivity {
-    private Button logoutBtn;
-    private Button continueBtn;
+
     private FirebaseUser user;
     private String uID;
     private DatabaseReference users;
@@ -38,8 +37,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-        logoutBtn = (Button) findViewById(R.id.BtnLogout);
-        continueBtn = (Button) findViewById(R.id.continueBtn);
+
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         uID = user.getUid();
         final TextView username = findViewById(R.id.idTVUserName);
@@ -74,36 +73,5 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         });
 
-
-        logoutBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent i = new Intent(DisplayMessageActivity.this,MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        /*
-        String name = "";
-        String type = "";
-        String finalType = type;
-        String finalName = name;
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent j;
-                if (finalType.equals("student")) {
-                    j = new Intent(DisplayMessageActivity.this, studentHome.class);
-                } else if (finalType.equals("instructor")) {
-                    j = new Intent(DisplayMessageActivity.this, instructorHome.class);
-                } else { // admin
-                    j = new Intent(DisplayMessageActivity.this, adminHome.class);
-                }
-                j.putExtra("Username", finalName);
-                startActivity(j);
-                finish();
-            }
-
-        });
-        */
     }
 }
