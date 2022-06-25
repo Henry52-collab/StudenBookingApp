@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 public class InstructorSearchCourse extends AppCompatActivity {
 
     private EditText identify;
+    private Button backBtn;
     private ListView courseViewer;
     private DatabaseReference db;
     private ArrayList<String> arrayList = new ArrayList<String>();
@@ -44,6 +47,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_course);
         //Initialize attributes
+        backBtn = (Button) findViewById(R.id.backBtn);
         db = FirebaseDatabase.getInstance().getReference("courses");
         courseViewer = (ListView) findViewById(R.id.courseList);
         identify = (EditText) findViewById(R.id.courseIdentifier);
@@ -119,6 +123,13 @@ public class InstructorSearchCourse extends AppCompatActivity {
                         return true;
                     }
                 });
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InstructorSearchCourse.this, instructorHome.class);
+                startActivity(intent);
             }
         });
     }
