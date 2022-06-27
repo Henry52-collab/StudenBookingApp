@@ -89,9 +89,16 @@ public class RegisterHome extends AppCompatActivity {
                 }
 
                 //password length can't be less than 6
-                if(password.length() <= 6){
+                if(password.length() < 6){
                     passwordEdt.setError("Password length can't be less than 6");
                     passwordEdt.requestFocus();
+                    return;
+                }
+
+                //check if username contains invalid characters
+                if(!userName.matches("[a-zA-Z]+")){
+                    usernameEdt.setError("Enter a valid username");
+                    usernameEdt.requestFocus();
                     return;
                 }
 
@@ -105,10 +112,12 @@ public class RegisterHome extends AppCompatActivity {
                                 case "student":
                                     User student = new User(userName,password,"student");
                                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(student);
+                                    Toast.makeText(RegisterHome.this,"Registered successfully as student", Toast.LENGTH_LONG).show();
                                     break;
                                 case "instructor":
                                     User instructor = new User(userName,password,"instructor");
                                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(instructor);
+                                    Toast.makeText(RegisterHome.this,"Registered successfully as instructor", Toast.LENGTH_LONG).show();
                                     Intent i = new Intent(getApplicationContext(), instructorHome.class);
                                     startActivity(i);
                                     break;
