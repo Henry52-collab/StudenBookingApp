@@ -22,7 +22,6 @@ public class instructorHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_home);
         search = findViewById(R.id.btnSearch);
-        view = findViewById(R.id.btnView);
         assign = findViewById(R.id.btnAssign);
         logout = findViewById(R.id.btnlogout);
         edit = findViewById(R.id.btnEdit);
@@ -39,14 +38,6 @@ public class instructorHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        //Onclick listener for the viewCourse button.
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent  intent = new Intent(instructorHome.this,InstructorViewCourse.class);
-                startActivity(intent);
             }
         });
         //Onclick listener for the editCourse button.
