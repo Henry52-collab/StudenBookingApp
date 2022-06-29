@@ -32,9 +32,6 @@
             android:name=".InstructorEditCourse"
             android:exported="false" />
         <activity
-            android:name=".InstructorViewCourse"
-            android:exported="false" />
-        <activity
             android:name=".InstructorSearchCourse"
             android:exported="false" />
         <activity
