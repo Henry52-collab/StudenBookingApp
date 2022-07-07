@@ -55,6 +55,7 @@ public class TimeChecker {
         return false;
     }
 
+
     /**
      * Checks if end is after start.
      * @param start is the start time

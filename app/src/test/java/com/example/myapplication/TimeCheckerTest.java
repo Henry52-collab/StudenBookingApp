@@ -15,7 +15,6 @@ public class TimeCheckerTest {
         assertFalse("wrong",TimeChecker.timeConflictExists(a,b,c,d));
     }
 
-
     @Test
     public void testTimeConflictExists1(){
         String a = "08:00";
