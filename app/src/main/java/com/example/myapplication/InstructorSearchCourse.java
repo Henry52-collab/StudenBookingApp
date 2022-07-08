@@ -57,7 +57,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
         db.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String value = snapshot.getValue(Course.class).toString();
+                String value = snapshot.getValue(Course.class).toSearch();
                 String popupValue = snapshot.getValue(Course.class).getDetail();
                 arrayList.add(value);
                 popupContent.add(popupValue);
@@ -92,7 +92,8 @@ public class InstructorSearchCourse extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s.toString());
+                String temp = s.toString().replaceAll("\\s","");
+                adapter.getFilter().filter(temp);
             }
 
             @Override
@@ -128,8 +129,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InstructorSearchCourse.this, instructorHome.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

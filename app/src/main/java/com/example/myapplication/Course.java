@@ -13,6 +13,7 @@ public class Course {
     private String description;
     private String hours;
     private String days;
+    private String shortName;
     private int capacity;
 
     public Course() {
@@ -24,6 +25,7 @@ public class Course {
     public Course(String code,String name){
         this.code = code;
         this.name = name;
+        this.shortName = name.replaceAll("\\s","");
         this.instructor = "";
         this.description = "";
         this.hours = "";
@@ -39,6 +41,7 @@ public class Course {
         this.capacity = capacity;
         this.hours = hours;
         this.days = days;
+        this.shortName = name.replaceAll("\\s","");
     }
 
     public String getInstructor() {
@@ -94,6 +97,11 @@ public class Course {
 
     public void setName(String name){
         this.name = name;
+        shortName = name.replaceAll("\\s","");
+    }
+
+    public String toSearch() {
+        return "\nCourse Code: " + code + "\n" + "Course Name: " + name + "\n" + "Instructor: " + instructor + "\n" + "Search Name: " + shortName + "\n";
     }
 
     /**
