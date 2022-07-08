@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +54,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
         identify = (EditText) findViewById(R.id.courseIdentifier);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         courseViewer.setAdapter(adapter);
-
+        courseViewer.setTextFilterEnabled(true);
         db.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -92,6 +93,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Toast.makeText(InstructorSearchCourse.this,s.toString(),Toast.LENGTH_LONG).show();
                 adapter.getFilter().filter(s.toString());
             }
 
