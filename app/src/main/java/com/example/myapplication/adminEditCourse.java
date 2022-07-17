@@ -142,6 +142,5 @@ public class adminEditCourse extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

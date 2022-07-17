@@ -41,6 +41,8 @@
     <string name="AssignSelf">Assign</string>
     <string name="Unassign">Unassign</string>
     <string name="query1">Please select a course you\'d like to assign/unassign yourself to</string>
+    <string name="StudentHome">Student Home</string>
+    <string name="enroll">Enroll/Unenroll</string>
     <string-array name="userTypes">
         <item>student</item>
         <item>instructor</item>
