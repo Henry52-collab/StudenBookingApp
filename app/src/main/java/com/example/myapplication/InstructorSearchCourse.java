@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,7 +39,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
     private DatabaseReference db;
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ArrayList<String> popupContent = new ArrayList<String>();
-    private ArrayAdapter<String> adapter;
+    private SimpleFilterableAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
         db = FirebaseDatabase.getInstance().getReference("courses");
         courseViewer = (ListView) findViewById(R.id.courseList);
         identify = (EditText) findViewById(R.id.courseIdentifier);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        adapter = new SimpleFilterableAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         courseViewer.setAdapter(adapter);
 
         db.addChildEventListener(new ChildEventListener() {
@@ -92,8 +91,7 @@ public class InstructorSearchCourse extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String temp = s.toString().replaceAll("\\s","");
-                adapter.getFilter().filter(temp);
+                adapter.getFilter().filter(s);
             }
 
             @Override
