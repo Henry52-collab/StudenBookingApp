@@ -226,7 +226,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                     if (start1.equals("")) {
                         edtStart1.setError("Please add a start time.");
                         allValid = false;
-                    } else if (!isValidFormat(start1)) {
+                    } else if (!TimeChecker.isValidFormat(start1)) {
                         edtStart1.setError("Invalid format. Please try again.");
                         allValid = false;
                     }
@@ -234,13 +234,13 @@ public class InstructorEditCourse extends AppCompatActivity {
                     if (end1.equals("")) {
                         edtEnd1.setError("Please add an end time.");
                         allValid = false;
-                    } else if (!isValidFormat(end1)) {
+                    } else if (!TimeChecker.isValidFormat(end1)) {
                         edtEnd1.setError("Invalid format. Please try again.");
                         allValid = false;
                     }
 
                     // ii) end1 is not before start1
-                    if (allValid && !endIsAfter(start1, end1)) { // everything is valid so far, but end is before or equal to start
+                    if (allValid && ! TimeChecker.endIsAfter(start1, end1)) { // everything is valid so far, but end is before or equal to start
                         edtEnd1.setError("End time cannot be before/at start time.");
                         allValid = false;
                     }
@@ -256,7 +256,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                                         String t1 = hs[j].split("-", 2)[0];
                                         String t2 = hs[j].split("-", 2)[1];
 
-                                        if (timeConflictExists(start1, end1, t1, t2)) {
+                                        if (TimeChecker.timeConflictExists(start1, end1, t1, t2)) {
                                             edtStart1.setError("You have a lecture for " + courses.get(i).getCode() + " during this time. Please edit that course first or use a different time.");
                                             allValid = false;
                                         }
@@ -278,7 +278,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                     if (start2.equals("")) {
                         edtStart2.setError("Please add a start time.");
                         allValid = false;
-                    } else if (!isValidFormat(start2)) {
+                    } else if (!TimeChecker.isValidFormat(start2)) {
                         edtStart2.setError("Invalid format. Please try again.");
                         allValid = false;
                     }
@@ -286,13 +286,13 @@ public class InstructorEditCourse extends AppCompatActivity {
                     if (end2.equals("")) {
                         edtEnd2.setError("Please add an end time.");
                         allValid = false;
-                    } else if (!isValidFormat(end2)) {
+                    } else if (!TimeChecker.isValidFormat(end2)) {
                         edtEnd2.setError("Invalid format. Please try again.");
                         allValid = false;
                     }
 
                     // ii) end2 is not before or equal to start2
-                    if (allValid && !endIsAfter(start2, end2)) { // everything is valid so far, but end is before or equal to start
+                    if (allValid && ! TimeChecker.endIsAfter(start2, end2)) { // everything is valid so far, but end is before or equal to start
                         edtEnd2.setError("End time cannot be before start time.");
                         allValid = false;
                     }
@@ -309,7 +309,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                                        String t1 = hs[j].split("-", 2)[0];
                                        String t2 = hs[j].split("-", 2)[1];
 
-                                       if (timeConflictExists(start2, end2, t1, t2)) {
+                                       if (TimeChecker.timeConflictExists(start2, end2, t1, t2)) {
                                            edtStart2.setError("You have a lecture for " + courses.get(i).getCode() + " during this time. Please edit that course first or use a different time.");
                                            allValid = false;
                                        }
@@ -324,7 +324,7 @@ public class InstructorEditCourse extends AppCompatActivity {
 
                 // 5) if day1 and day2 were both selected, check that their times do not conflict
                 if (allValid && !day1.equals("none") && day1.equals(day2)) {
-                    if (timeConflictExists(start1, end1, start2, end2)) {
+                    if (TimeChecker.timeConflictExists(start1, end1, start2, end2)) {
                         edtStart2.setError("This conflicts with the other lecture you have for this course. Please enter a different time.");
                         allValid = false;
                     }
@@ -343,99 +343,6 @@ public class InstructorEditCourse extends AppCompatActivity {
 
     }
 
-    /**
-     * Checks if a time conflict exists between start-end and t1-t2.
-     * @param start is the start time
-     * @param end is the end time
-     * @param t1 is the other start time
-     * @param t2 is the other end time
-     * @return true if a time conflict exists, and false otherwise.
-     */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private boolean timeConflictExists(String start, String end, String t1, String t2) {
-
-        /* Ensure that all times are in a valid format for LocalTime */
-        if (start.length() == 4 && start.charAt(1) == ':') {
-            start = "0" + start;
-        }
-
-        if (end.length() == 4 && end.charAt(1) == ':') {
-            end = "0" + end;
-        }
-
-        if (t1.length() == 4 && t1.charAt(1) == ':') {
-            t1 = "0" + t1;
-        }
-
-        if (t2.length() == 4 && t2.charAt(1) == ':') {
-            t2 = "0" + t2;
-        }
-
-        /* Parse the times */
-        LocalTime s1 = LocalTime.parse(start);
-        LocalTime s2 = LocalTime.parse(end);
-        LocalTime s3 = LocalTime.parse(t1);
-        LocalTime s4 = LocalTime.parse(t2);
-
-        /* Check that s3 is not between s1 and s2 */
-        if (s3.compareTo(s1) >= 0 && s3.compareTo(s2) <= 0) {
-            return true;
-        }
-
-        /* Check that s4 is not between s1 and s2 */
-        if (s4.compareTo(s1) >= 0 && s4.compareTo(s2) <= 0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks if time is a valid format by attempting to parse it into LocalTime.
-     * @param time is the String whose format needs to be checked
-     * @return true if successful, and false otherwise
-     */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private boolean isValidFormat(String time) {
-
-        try {
-            if (time.length() == 4 && time.charAt(1) == ':') {
-                time = "0" + time;
-            }
-            LocalTime.parse(time);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if end is after start.
-     * @param start is the start time
-     * @param end is the end time
-     * @return true if end is after, and false otherwise.
-     */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private boolean endIsAfter(String start, String end) {
-
-        if (start.length() == 4 && start.charAt(1) == ':') {
-            start = "0" + start;
-        }
-
-        if (end.length() == 4 && end.charAt(1) == ':') {
-            end = "0" + end;
-        }
-
-        LocalTime t1 = LocalTime.parse(start);
-        LocalTime t2 = LocalTime.parse(end);
-
-        if (t2.compareTo(t1) <= 0) { // end time is before start time
-            return false;
-        } else {
-            return true;
-        }
-
-    }
 
 
 }

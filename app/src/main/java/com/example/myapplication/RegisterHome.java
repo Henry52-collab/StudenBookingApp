@@ -34,6 +34,7 @@ public class RegisterHome extends AppCompatActivity {
     private ArrayAdapter adapter;
     private FirebaseAuth mAuth;
     private Button backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,8 @@ public class RegisterHome extends AppCompatActivity {
         /**
          * This method is called when register button is clicked.
          * */
+
+
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
