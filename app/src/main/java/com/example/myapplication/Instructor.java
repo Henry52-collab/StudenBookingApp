@@ -34,7 +34,7 @@ public class Instructor extends User {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Course course = snapshot.getValue(Course.class);
-                courses.child(key).setValue(new Course(course.getCode(),course.getName(),name,course.getDay(),course.getCapacity(),course.getHour(),course.getDescription()));
+                courses.child(key).setValue(new Course(course.getCode(),course.getName(),name,course.getDay(),course.getCapacity(),course.getHour(),course.getDescription(), course.getStudents()));
             }
 
             @Override
@@ -50,7 +50,7 @@ public class Instructor extends User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Course course = snapshot.getValue(Course.class);
-                courses.child(key).setValue(new Course(course.getCode(),course.getName(),"", "",100, "",""));
+                courses.child(key).setValue(new Course(course.getCode(),course.getName(),"", "",100, "","",""));
             }
 
             @Override

@@ -25,6 +25,8 @@ public class instructorHome extends AppCompatActivity {
         assign = findViewById(R.id.btnAssign);
         logout = findViewById(R.id.btnlogout);
         edit = findViewById(R.id.btnEdit);
+        view = findViewById(R.id.ViewMyCourses);
+
         //Onclick listener for the assign button.
         assign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,14 @@ public class instructorHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        view.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(instructorHome.this, InstructorViewCourses.class);
+                startActivity(intent);
+            }
+        }));
     }
 
 }
