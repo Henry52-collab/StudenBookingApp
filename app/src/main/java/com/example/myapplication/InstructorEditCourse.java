@@ -47,7 +47,7 @@ public class InstructorEditCourse extends AppCompatActivity {
     private Query q1, q2;
     private ArrayList<String> codes = new ArrayList<>();
     private ArrayList<Course> courses = new ArrayList<>();
-    private String day1, day2, courseKey, courseDescription;
+    private String day1, day2, courseKey, courseDescription, students;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +132,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                             courseKey = data.getKey();
                             tvCode.setText("Course code: " + data.getValue(Course.class).getCode());
                             tvName.setText("Course name: " + data.getValue(Course.class).getName());
+                            students = data.getValue(Course.class).getStudents();
                         }
                     }
 
@@ -332,7 +333,7 @@ public class InstructorEditCourse extends AppCompatActivity {
 
                 /* If input passes all checks, edit the course; otherwise, don't do anything */
                 if (allValid) {
-                    Course course = new Course(code, name, username, days, capacity, hours, courseDescription);
+                    Course course = new Course(code, name, username, days, capacity, hours, courseDescription, students);
                     Instructor.editCourse(courseKey, course);
                     Toast.makeText(InstructorEditCourse.this, "Successfully edited " + code, Toast.LENGTH_LONG).show();
                 } else {

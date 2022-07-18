@@ -13,6 +13,7 @@ public class Course {
     private String description;
     private String hours;
     private String days;
+    private String students;
     private int capacity;
 
     public Course() {
@@ -31,7 +32,7 @@ public class Course {
         this.capacity = 100;
     }
 
-    public Course(String code, String name, String instructor, String days,int capacity, String hours,String description){
+    public Course(String code, String name, String instructor, String days,int capacity, String hours,String description,String students){
         this.code = code;
         this.name = name;
         this.instructor = instructor;
@@ -39,6 +40,7 @@ public class Course {
         this.capacity = capacity;
         this.hours = hours;
         this.days = days;
+        this.students = students;
     }
 
     public String getInstructor() {
@@ -80,6 +82,14 @@ public class Course {
         this.capacity = capacity;
     }
 
+    public String getStudents() {
+        return this.students;
+    }
+
+    public void setStudents(String students) {
+        this.students = students;
+    }
+
     public String getCode(){
         return code;
     }
@@ -95,6 +105,7 @@ public class Course {
     public void setName(String name){
         this.name = name;
     }
+
 
     public String toSearch() {
         return name + "\n" + "Course Code: " + code + "\n" + "Instructor: " + instructor + "\n" + "Days: " + days;
