@@ -97,7 +97,7 @@ public class Course {
     }
 
     public String toSearch() {
-        return name + "\n" + "Course Code: " + code + "\n" + "Instructor: " + instructor + "\n";
+        return name + "\n" + "Course Code: " + code + "\n" + "Instructor: " + instructor + "\n" + "Days: " + days;
     }
 
     /**

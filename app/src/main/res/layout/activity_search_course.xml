@@ -34,7 +34,9 @@
                 android:id="@+id/courseList"
                 android:layout_width="wrap_content"
                 android:layout_height="500dp"
-                android:layout_centerHorizontal="true" />
+                android:divider="@color/divider"
+                android:dividerHeight="1dip"
+                android:clipToPadding="false" />
         </TableRow>
 
         <TableRow
