@@ -52,6 +52,16 @@ public class TimeChecker {
             return true;
         }
 
+        /* Check that s1 is not between s3 and s4 */
+        if (s1.compareTo(s3) >= 0 && s1.compareTo(s4) <= 0) {
+            return true;
+        }
+
+        /* Check that s2 is not between s3 and s4 */
+        if (s2.compareTo(s3) >= 0 && s2.compareTo(s4) <= 0) {
+            return true;
+        }
+
         return false;
     }
 

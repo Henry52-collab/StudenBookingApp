@@ -257,7 +257,7 @@ public class InstructorEditCourse extends AppCompatActivity {
                                         String t1 = hs[j].split("-", 2)[0];
                                         String t2 = hs[j].split("-", 2)[1];
 
-                                        if (TimeChecker.timeConflictExists(start1, end1, t1, t2)) {
+                                        if (TimeChecker.timeConflictExists(t1,t2, start1, end1)) {
                                             edtStart1.setError("You have a lecture for " + courses.get(i).getCode() + " during this time. Please edit that course first or use a different time.");
                                             allValid = false;
                                         }
