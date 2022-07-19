@@ -30,6 +30,7 @@ public class Course {
         this.hours = "";
         this.days = "";
         this.capacity = 100;
+        this.students = "";
     }
 
     public Course(String code, String name, String instructor, String days,int capacity, String hours,String description,String students){
@@ -106,9 +107,40 @@ public class Course {
         this.name = name;
     }
 
+    /**
+     * Add a student to the string of students
+     * @param name Name of the student
+     * @return String of students with the new student added
+     * */
+    public String addStudent(String name){
+        if(!students.contains(name))
+            return students + " " + name;
+        return "false";
+    }
 
     public String toSearch() {
         return name + "\n" + "Course Code: " + code + "\n" + "Instructor: " + instructor + "\n" + "Days: " + days;
+    }
+
+    /**
+     * Delete a student from the string of students
+     * @param name name of the student
+     * @return The string of students with the student removed
+     * */
+    public String deleteStudent(String name){
+        if(!students.contains(name))
+            return "false";
+        String[] s = students.split(" ");
+        String result = "";
+        for(int x = 0;x < s.length;x++){
+            if(s[x].equals(name)) {
+                s[x] = " ";
+                continue;
+
+            }
+            else result += s[x] + " ";
+        }
+        return result;
     }
 
     /**
@@ -118,6 +150,10 @@ public class Course {
         return "\nCourse Code: " + code + "\n" + "Course Name: " + name + "\n" + "Instructor: " + instructor + "\n";
     }
 
+    /**
+     * return the details of this course
+     * @return details of this course
+     * */
     public String getDetail() {
 
         StringBuilder info = new StringBuilder();

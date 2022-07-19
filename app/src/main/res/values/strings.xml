@@ -43,6 +43,10 @@
     <string name="query1">Please select a course you\'d like to assign/unassign yourself to</string>
     <string name="StudentHome">Student Home</string>
     <string name="enroll">Enroll/Unenroll</string>
+    <string name="Select">Please select the course you\'d like to enroll</string>
+    <string name="select">Please select a course you\'d like to enroll/unenroll</string>
+    <string name="Enroll">Enroll</string>
+    <string name="unenroll">Unenroll</string>
     <string-array name="userTypes">
         <item>student</item>
         <item>instructor</item>
