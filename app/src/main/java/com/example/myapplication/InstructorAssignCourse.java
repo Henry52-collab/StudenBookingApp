@@ -124,6 +124,7 @@ public class InstructorAssignCourse extends AppCompatActivity {
                 Toast.makeText(InstructorAssignCourse.this, "Please select a course.", Toast.LENGTH_SHORT).show();
             }
         });
+
         //Assign course
         assign.setOnClickListener(new View.OnClickListener() {
             @Override
