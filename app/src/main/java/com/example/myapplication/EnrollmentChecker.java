@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
-public class EnrollmentChecker {
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class EnrollmentChecker {
     /**
      * Returns true if the student is enrolled in the course,
      * and false otherwise.
@@ -11,7 +13,6 @@ public class EnrollmentChecker {
      * @return true if student is enrolled, and false otherwise
      */
     public static boolean isEnrolled(Course course, String username) {
-
         /* Get all students from the course */
         String str = course.getStudents();
 
