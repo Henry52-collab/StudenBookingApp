@@ -92,9 +92,5 @@ public class StudentView extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
-
-
 }

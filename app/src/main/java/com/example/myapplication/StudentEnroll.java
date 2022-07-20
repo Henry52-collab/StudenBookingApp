@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.TaskStackBuilder;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,8 +42,8 @@ public class StudentEnroll extends AppCompatActivity {
     private DatabaseReference users;
     private String student;
     private String students;
-
-
+    private Course c;
+    private ArrayList<Course> courses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class StudentEnroll extends AppCompatActivity {
         uID = user.getUid();
         student = user.getDisplayName();
         users = FirebaseDatabase.getInstance().getReference().child("Users");
+        courses = new ArrayList<>();
 
         //Retrieve the user name
         users.child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -68,6 +71,23 @@ public class StudentEnroll extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 if(user != null) name = user.getName();
                 else name = "Error";
+                //Retrieve all courses
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        courses.clear();
+                        for (DataSnapshot data: snapshot.getChildren()) {
+                            if (EnrollmentChecker.isEnrolled(data.getValue(Course.class),name)) {
+                                courses.add(data.getValue(Course.class));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
@@ -100,11 +120,13 @@ public class StudentEnroll extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selected = parent.getItemAtPosition(position).toString();
                 q = db.orderByChild("code").equalTo(selected);
+
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot data: snapshot.getChildren()) {
                             key = data.getKey(); // save key
+                            c = data.getValue(Course.class);
                             students = data.getValue(Course.class).getStudents();//save students
                         }
                     }
@@ -124,12 +146,15 @@ public class StudentEnroll extends AppCompatActivity {
 
         //Enroll into course
         enroll.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                if(students.contains(name))Toast.makeText(StudentEnroll.this, "unable to enroll", Toast.LENGTH_SHORT).show();
-                else{
+                if(!students.contains(name) && Student.checkConflict(c,name,courses)){
                     Student.enroll(key,name);
                     Toast.makeText(StudentEnroll.this, "You have been enrolled", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(StudentEnroll.this, "unable to enroll", Toast.LENGTH_SHORT).show();
                 }
             }
         });
